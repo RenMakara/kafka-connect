@@ -1,0 +1,41 @@
+{
+  "name": "postgres-itp-source",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+
+    "database.hostname": "postgres-dbz",
+    "database.port": "5432",
+    "database.user": "itpuser",
+    "database.password": "itp@1234",
+    "database.dbname": "itp_db",
+    "database.server.name": "itp-postgres",
+
+    "plugin.name": "pgoutput",
+    "slot.name": "itp_slot",
+    "publication.name": "itp_publication",
+
+    "topic.prefix": "itp",
+
+    "schema.include.list": "public",
+    "table.include.list": "public.*",
+
+    "snapshot.mode": "initial",
+
+    "tombstones.on.delete": "false",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter.schemas.enable": "false",
+
+    "decimal.handling.mode": "string",
+    "time.precision.mode": "connect",
+
+    "heartbeat.interval.ms": "10000",
+    "heartbeat.topics.prefix": "__debezium-heartbeat",
+
+    "database.history.kafka.bootstrap.servers": "kafka-dbz:9092",
+    "database.history.kafka.topic": "schema-changes.itp_db"
+  }
+}
